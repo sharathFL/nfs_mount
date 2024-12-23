@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  nfs-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nfs-client
+    network_mode: host
+    volumes:
+      - /mnt/shared_volume:/mnt/shared_volume:rw
+    environment:
+      - NFS_SERVER=kiba

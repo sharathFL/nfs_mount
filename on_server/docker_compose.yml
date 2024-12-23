@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  nfs-server:
+    image: itsthenetwork/nfs-server-alpine:latest
+    container_name: nfs-server
+    environment:
+      - SHARED_DIRECTORY=/exports
+    volumes:
+      - /mnt/shared_volume:/exports:rw
+    ports:
+      - "2049:2049" # Expose NFS port
