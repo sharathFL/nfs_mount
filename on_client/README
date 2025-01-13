@@ -1,0 +1,11 @@
+On the client machine **after** installing the nfs server 
+
+install nfs-commons using apt on client
+```sudo apt install nfs-common```  
+check using ```showmount -e <ip-address-of-server>```  
+This should list the exports exported by the server  
+next create a folder e.g. ```/mnt/rpi_folder```  
+and mount the nfs-servers folder to the newly created ```rpi_folder``` using  
+```sudo mount <ip-of-nfs-server>:/exports/nfs  /mnt/rpi_folder```  
+
+now any editing of the rpi_folder is reflected under the nfs_servers exported folder.
