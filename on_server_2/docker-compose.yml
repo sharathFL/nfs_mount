@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  nfs-server:
+    build: .
+    container_name: nfs-server
+    privileged: true
+    network_mode: "host"
+    # ports:
+    #   - "2049:2049"
+    #   - "111:111"
+    #   - "32765:32765"
+    volumes:
+      - ./mcm_shared_volume:/export/nfs  # Map the host directory to the container's NFS directory
+    command: |
+      bash -c "
+      mkdir -p /run/sendsigs.omit.d &&
+      ln -s /run/rpcbind /run/sendsigs.omit.d/rpcbind &&
+      service rpcbind start &&
+      service nfs-kernel-server start &&
+      exportfs -a &&
+      echo 'NFS Server is running...' &&
+      tail -f /dev/null"    
+
+

@@ -8,9 +8,13 @@ services:
       - ./mcm_shared_volume/:/shared
     environment:
       - SHARED_DIRECTORY=/shared
-      # Uncomment these if needed
-      # - READ_ONLY=true
-      # - SYNC=true
-      # - PERMITTED=10.11.12.*
+      # Uncomment or add these as needed:
+      # - PERMITTED=192.168.68.0/24  # Allow your subnet
+      # - READ_ONLY=true           # Uncomment if read-only is desired
+      # - SYNC=true                # Uncomment if sync is desired
     ports:
-      - "2049:2049"
+      - "2049:2049"  # NFS
+    #   # - "111:111"    # RPCBind
+    # network_mode: host
+    command: ["showmount", "-e"]
+
